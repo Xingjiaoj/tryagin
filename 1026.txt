@@ -1,0 +1,204 @@
+<template>
+  <div class="main">
+    <el-row class="row">
+      <!-- 左边区域 -->
+      <el-col :span="10">
+        <el-card>
+          <!-- 搜索区域 -->
+          <el-input
+            placeholder="请输入想要查找的设备"
+            v-model="searchVal"
+            class="search"
+          >
+            <el-button slot="append" icon="el-icon-search"></el-button>
+          </el-input>
+          <!-- 表格区域 -->
+          <el-table :data="tableData" stripe style="width: 100%">
+            <el-table-column prop="date" label="设备名称" width="180">
+            </el-table-column>
+            <el-table-column prop="name" label="所在省份" width="180">
+            </el-table-column>
+            <el-table-column prop="address" label="所在路段"> </el-table-column>
+            <el-table-column label="选择该设备">
+              <template>
+                <el-button size="mini">选择</el-button>
+              </template></el-table-column
+            >
+          </el-table>
+          <!-- 分页区域 -->
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page.sync="currentPage1"
+            :page-size="100"
+            layout="total, prev, pager, next"
+            :total="1000"
+            :background="true">
+          </el-pagination>
+          <el-button class="measure" type="primary"><i class="el-icon-thumb">发出实时测量请求</i></el-button>
+          <el-progress :text-inside="true" :stroke-width="18" :percentage="70" :color="customColor"></el-progress>
+        </el-card>
+      </el-col>
+      <!-- 右边区域 -->
+      <el-col :span="14" class="rightRegion">
+        <el-row class="selectedDeviceInfoTitle" type="flex" justify="center">
+          所选设备信息</el-row>
+        <el-row class="selectedDeviceInfo">
+          <span class="measureRecord">测量记录</span> 
+           <div>
+             <el-carousel trigger="click" height="300px">
+              <el-carousel-item v-for="item in 5" :key="item">
+              <h3 class="small">
+                {{ item }}
+                </h3>
+             </el-carousel-item>
+    </el-carousel></div>
+          </el-row>
+        <el-row class="echartsPic">测量曲线图</el-row>
+
+      </el-col>
+    </el-row>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      currentPage1: 5,
+      customColor:'#4682B4' ,
+      tableData: [
+        {
+          date: "设备1",
+          name: "四川",
+          address: "路段1",
+        },
+        {
+          date: "设备2",
+          name: "北京",
+          address: "路段1",
+        },
+        {
+          date: "设备3",
+          name: "吉林",
+          address: "路段1",
+        },
+        {
+          date: "设备4",
+          name: "广东",
+          address: "路段1",
+        },
+        {
+          date: "设备5",
+          name: "广东",
+          address: "路段1",
+        },
+        {
+          date: "设备6",
+          name: "广东",
+          address: "路段1",
+        },
+        {
+          date: "设备7",
+          name: "广东",
+          address: "路段1",
+        },
+        {
+          date: "设备8",
+          name: "广东",
+          address: "路段1",
+        },
+        {
+          date: "设备9",
+          name: "广东",
+          address: "路段1",
+        },
+      ],
+    };
+  },
+  methods: {
+    handleSizeChange(val) {
+      console.log(`每页 ${val} 条`);
+    },
+    handleCurrentChange(val) {
+      console.log(`当前页: ${val}`);
+    },
+  },
+};
+</script>
+
+<style scoped>
+.main,
+.el-card,
+.row,
+.el-col {
+  height: 100%;
+}
+.el-table {
+  margin-top: 20px;
+}
+
+.rightRegion {
+  border-radius: 5px;
+  border: bisque 1px solid;
+}
+
+.selectedDeviceInfoTitle {
+  font-size: 22px;
+  color: bisque;
+  height: 5%;
+  border-bottom: bisque 1px solid;
+}
+.selectedDeviceInfo {
+  height: 40%;
+  background: rgba(151, 108, 108, 0.2);
+}
+.echartsPic {
+  height: 55%;
+  background: rgba(2, 108, 108, 0.2);
+  font-size: 30px;
+}
+/* .leftBottom{
+  height: 100px;
+  width: 500px;
+  background-color: #fff;
+} */
+.measure{
+  margin-top:60px;
+  margin-left: 200px;
+  background-color: #4682B4;
+}
+.el-icon-thumb{
+  height: 50px;
+  width: 300px;
+  font-size: 30px;
+  line-height: 50px;
+}
+.el-progress{
+  /* height: 200px; */
+  width: 330px;
+  margin:0 auto;
+  margin-top: 10px;
+}
+.selectedDeviceInfo .measureRecord{
+  margin:0 auto;
+  width: 500px;
+  font-size: 30px;
+  text-align: center;
+}
+.el-carousel__item h3 {
+    color: #475669;
+    font-size: 20px;
+    opacity: 0.75;
+    line-height: 240px;
+    margin: 0;
+  }
+
+  .el-carousel__item:nth-child(2n) {
+     background-color: #99a9bf;
+  }
+  
+  .el-carousel__item:nth-child(2n+1) {
+     background-color: #d3dce6;
+  }
+</style>
