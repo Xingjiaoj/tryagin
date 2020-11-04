@@ -1,0 +1,1 @@
+测试jjxing关注(Watch)了Xingjiaoj的tryagin项目之后，jjxing的GitHub主页是否显示该次创建动态
